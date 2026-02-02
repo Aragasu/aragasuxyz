@@ -2,54 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Astra Client Quick Launch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astra Client</title>
-  <!-- Unbounded font from Google Fonts -->
+
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #000;
+      background: #000;
       color: #fff;
       font-family: 'Unbounded', sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       text-align: center;
     }
 
+    .hidden {
+      display: none;
+    }
+
     h1 {
       font-size: 4rem;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
 
     .button {
-      background-color: #fff;
+      background: #fff;
       color: #000;
       border: none;
-      border-radius: 12px;
-      padding: 15px 30px;
+      border-radius: 14px;
+      padding: 16px 34px;
       font-size: 1.2rem;
       margin: 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
       text-decoration: none;
+      transition: 0.25s;
       display: inline-block;
     }
 
     .button:hover {
-      background-color: #444;
+      background: #444;
       color: #fff;
     }
   </style>
 </head>
 <body>
-  <h1>Astra Client</h1>
 
-  <a href="https://astraclient.com/play/js/18/" class="button">Launch</a>
-  <a href="_jxstShadow-ASTRACLIENT-backup.epk" download class="button">Download backup.epk</a>
+<div id="content" class="hidden">
+  <div>
+    <h1>Astra Client</h1>
+
+    <a href="_jxstShadow-ASTRACLIENT-backup.epk" download class="button">
+      Download backup.epk
+    </a>
+
+    <a href="https://astraclient.com/play/js/18/" class="button">
+      Launch
+    </a>
+  </div>
+</div>
+
+<script>
+  const PASSWORD = "aragasu"; // ← HIER ändern
+
+  const input = prompt("Password:");
+
+  if (input === PASSWORD) {
+    document.getElementById("content").classList.remove("hidden");
+  } else {
+    document.body.innerHTML = "<h2>Access denied.</h2>";
+  }
+</script>
+
 </body>
 </html>
