@@ -125,7 +125,7 @@ fetch('info.txt')
   })
   .catch(err => console.error('Failed to load info.txt', err));
 
-/* === Load link cards from cards.txt with icon + optional description === */
+/* === Load link cards from cards.txt (NO icons) === */
 fetch('cards.txt')
   .then(res => res.text())
   .then(text => {
@@ -135,29 +135,23 @@ fetch('cards.txt')
     for (let i = 0; i < lines.length; i++) {
       if (!lines[i]) continue; // Leerzeile = Trennung
 
-      const icon = lines[i];      i++;
-      const title = lines[i] || ''; i++;
-      const url = lines[i] || '';   i++;
-      let desc = lines[i] || '';   i++;
+      const title = lines[i]; i++;
+      const url = lines[i];   i++;
+      let desc = lines[i] || ''; i++;
 
       if (desc === '{0}') desc = '';
-
       if (!title || !url) continue;
 
       const a = document.createElement('a');
       a.className = 'link-card';
       a.href = url;
       a.target = url.startsWith('http') ? '_blank' : '_self';
-      a.innerHTML = `
-        <i class="${icon}" style="position:absolute; top:12px; left:12px; font-size:1.2rem;"></i>
-        <span style="margin-left: 28px;"><strong>${title}</strong>${desc ? '<br><span>' + desc + '</span>' : ''}</span>
-      `;
-      a.style.position = 'relative';
+      a.innerHTML = `<strong>${title}</strong>${desc ? '<br><span>' + desc + '</span>' : ''}`;
+
       container.appendChild(a);
     }
   })
-  .catch(err => console.error('Failed to load cards.txt', err));
-</script>
+  .catch(err => console.error('Failed to load cards.txt', err));</script>
 
 </body>
 </html>
