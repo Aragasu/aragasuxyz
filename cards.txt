@@ -2,8 +2,3 @@ fab fa-star
 Tethered
 https://www.roblox.com/share?code=aac58ef2359e954c822a8889ab5710f0&type=ExperienceDetails&stamp=1770042095041
 Tethered is a physics-based multiplayer experiment on Roblox where all players are chained together. Currently in pre pre pre pre alpha. (just expect a lot of bugs)
-
-fab fa-lock
-Secret
-https://aragasu.xyz/secret
-Totally secret thing i got here. I'm sure no one is gonna find this...
