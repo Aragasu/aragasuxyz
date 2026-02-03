@@ -1,4 +1,4 @@
 fa fab-code
 Tethered
-https://www.roblox.com/games/78305648977795/Tethered
+https://rblx.games/78305648977795
 Tethered is a physics-based multiplayer experiment on Roblox where all players are chained together. Currently in pre pre pre pre alpha. (just expect a lot of bugs)
