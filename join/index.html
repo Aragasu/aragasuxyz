@@ -43,6 +43,12 @@
       cursor: pointer;
       background: linear-gradient(90deg, #6a5cff, #9b5cff);
       color: #fff;
+      margin-top: 10px;
+    }
+
+    button.secondary {
+      background: #111;
+      border: 1px solid #444;
     }
 
     button:hover {
@@ -76,9 +82,12 @@
 
     <div class="admin-panel" id="adminPanel">
       <h2>Admin Panel</h2>
+
       <input id="adminGameName" placeholder="Game Name">
       <input id="adminGameLink" placeholder="Join Link">
+
       <button id="saveBtn">Save</button>
+      <button id="offlineBtn" class="secondary">Go Offline</button>
     </div>
   </div>
 
@@ -111,6 +120,7 @@
     const adminGameName = document.getElementById("adminGameName");
     const adminGameLink = document.getElementById("adminGameLink");
     const saveBtn = document.getElementById("saveBtn");
+    const offlineBtn = document.getElementById("offlineBtn");
 
     let currentLink = "https://aragasu.xyz/404";
 
@@ -156,6 +166,14 @@
       GAME_DOC.set({
         name: adminGameName.value || "Offline",
         link: adminGameLink.value || "https://aragasu.xyz/404",
+        lastUpdated: Date.now()
+      });
+    };
+
+    offlineBtn.onclick = () => {
+      GAME_DOC.set({
+        name: "Offline",
+        link: "https://aragasu.xyz/404",
         lastUpdated: Date.now()
       });
     };
