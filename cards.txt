@@ -1,3 +1,7 @@
 Tethered
 https://aragasu.xyz/tethered
 Tethered is a physics-based multiplayer experiment on Roblox where all players are chained together. Currently in pre pre pre pre alpha. (just expect a lot of bugs)
+
+Chat
+https://aragasu.xyz/chat
+This is a public chatting room.
