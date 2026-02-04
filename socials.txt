@@ -21,7 +21,3 @@ fab fa-twitch
 Email
 mailto:contact@aragasu.xyz
 fas fa-envelope
-
-Website
-https://aragasu.xyz
-fas fa-globe
