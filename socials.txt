@@ -11,5 +11,5 @@ https://steamcommunity.com/id/aragasu/
 fab fa-steam
 
 Email
-mailto:contact@aragasu.xyz
+&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#97;&#114;&#97;&#103;&#97;&#115;&#117;&#46;&#120;&#121;&#122;
 fas fa-envelope
