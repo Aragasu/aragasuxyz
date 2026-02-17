@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wichtelziehung</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<canvas id="snow"></canvas>
+
+<div class="center-wrapper">
+
+  <div class="card">
+    <h1>Wichtelziehung</h1>
+
+    <select id="nameSelect"></select>
+    <button id="rollBtn">Ziehen</button>
+
+    <div id="rollingName"></div>
+    <div id="result"></div>
+
+    <div id="disabledMessage" class="disabled hidden">
+      woah. what are you doing here?<br>
+      it's not the right time for this.
+    </div>
+  </div>
+
+  <div id="adminPanel" class="card hidden">
+    <h2>Admin</h2>
+
+    <input id="newPerson" placeholder="Name hinzufügen">
+    <button onclick="addPerson()">Hinzufügen</button>
+
+    <button onclick="resetAll()" class="danger">Full Reset</button>
+    <button onclick="toggleGlobal()" id="toggleBtn">Disable Ziehung</button>
+
+    <div id="pairs"></div>
+  </div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
