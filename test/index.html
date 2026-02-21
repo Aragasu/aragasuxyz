@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+}
+
+video {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.startScreen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+}
+
+button {
+    font-family: "Unbounded", sans-serif;
+    font-size: 22px;
+    padding: 18px 42px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: white;
+    color: black;
+    
+    /* clean glow */
+    box-shadow:
+        0 0 10px rgba(255,255,255,.8),
+        0 0 25px rgba(255,255,255,.6),
+        0 0 50px rgba(255,255,255,.35);
+
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+button:hover {
+    transform: scale(1.06);
+    box-shadow:
+        0 0 15px rgba(255,255,255,1),
+        0 0 35px rgba(255,255,255,.8),
+        0 0 70px rgba(255,255,255,.5);
+}
+</style>
+</head>
+<body>
+
+<video id="video" loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+</video>
+
+<audio id="audio" loop>
+    <source src="audio.mp3" type="audio/mpeg">
+</audio>
+
+<div class="startScreen" id="startScreen">
+    <button id="startBtn">Button</button>
+</div>
+
+<script>
+const btn = document.getElementById("startBtn");
+const video = document.getElementById("video");
+const audio = document.getElementById("audio");
+const startScreen = document.getElementById("startScreen");
+
+btn.onclick = async () => {
+    startScreen.style.display = "none";
+
+    await video.play().catch(()=>{});
+    await audio.play().catch(()=>{});
+};
+</script>
+
+</body>
+</html>
