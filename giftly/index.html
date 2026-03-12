@@ -1,310 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>aragasu.xyz | Giftly</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giftly</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        :root {
+            --bg-main: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            /* Hier habe ich das Lila angepasst */
+            --accent: #5865F2; 
+            --accent-hover: #4752C4;
+            --border-color: #333333;
+        }
 
-<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Inter,sans-serif;
-}
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-body{
-background: radial-gradient(circle at 20% 10%, #3b0764, #050008 75%);
-color:white;
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-}
+        .navbar {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
 
-/* background glow */
+        .container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
 
-.bg1{
-position:fixed;
-width:900px;
-height:900px;
-background:radial-gradient(circle,#6d28d9,transparent 70%);
-filter:blur(220px);
-top:-350px;
-left:-250px;
-z-index:-1;
-opacity:0.6;
-}
+        .bot-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
 
-.bg2{
-position:fixed;
-width:900px;
-height:900px;
-background:radial-gradient(circle,#4c1d95,transparent 70%);
-filter:blur(220px);
-bottom:-350px;
-right:-250px;
-z-index:-1;
-opacity:0.6;
-}
+        .bot-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-card);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            background-color: #000;
+        }
 
-/* header */
+        .bot-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
 
-header{
-width:100%;
-padding:30px;
-display:flex;
-justify-content:center;
-}
+        .bot-info .short-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
 
-.title{
-font-size:42px;
-font-weight:700;
-letter-spacing:1px;
-}
+        .badge {
+            display: inline-block;
+            background-color: rgba(88, 101, 242, 0.15);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
 
-/* container */
+        .btn-invite {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
 
-.container{
-width:100%;
-max-width:1000px;
-padding:20px;
-}
+        .btn-invite:hover {
+            background-color: var(--accent-hover);
+        }
 
-/* bot card */
+        .content-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
 
-.bot-card{
-display:flex;
-gap:20px;
-align-items:center;
-background:rgba(255,255,255,0.04);
-backdrop-filter:blur(12px);
-border-radius:16px;
-padding:25px;
-box-shadow:0 0 30px rgba(90,0,160,0.25);
-margin-bottom:40px;
-}
+        .content-card p {
+            margin-bottom: 1.5rem;
+            color: #d1d1d5;
+        }
 
-/* avatar */
+        .content-card h3 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-.bot-avatar{
-width:90px;
-height:90px;
-border-radius:50%;
-overflow:hidden;
-flex-shrink:0;
-box-shadow:0 0 18px rgba(150,0,255,0.6);
-}
+        .content-card ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
 
-.bot-avatar img{
-width:100%;
-height:100%;
-object-fit:cover;
-border-radius:50%;
-}
+        .content-card ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #d1d1d5;
+        }
 
-/* bot info */
-
-.bot-info h1{
-font-size:30px;
-margin-bottom:6px;
-}
-
-.subtitle{
-color:#c4b5fd;
-margin-bottom:10px;
-}
-
-.bot-info p{
-opacity:0.85;
-}
-
-/* invite */
-
-.invite{
-margin-left:auto;
-}
-
-.invite a{
-background:#000;
-padding:8px 18px;
-border-radius:8px;
-text-decoration:none;
-color:white;
-font-weight:500;
-font-size:14px;
-transition:0.2s;
-border:1px solid rgba(255,255,255,0.15);
-}
-
-.invite a:hover{
-background:#111;
-box-shadow:0 0 10px rgba(255,255,255,0.15);
-}
-
-/* sections */
-
-.section{
-background:rgba(255,255,255,0.04);
-border-radius:16px;
-padding:30px;
-margin-bottom:30px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(80,0,150,0.2);
-}
-
-.section h2{
-margin-bottom:15px;
-font-size:22px;
-}
-
-/* features grid */
-
-.features{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.feature{
-background:rgba(255,255,255,0.035);
-padding:18px;
-border-radius:10px;
-}
-
-.feature b{
-display:block;
-margin-bottom:5px;
-}
-
-/* footer */
-
-.footer{
-opacity:0.5;
-text-align:center;
-padding:40px;
-}
-
-</style>
+        .content-card ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="bg1"></div>
-<div class="bg2"></div>
+    <div class="navbar">Giftly</div>
 
-<header>
-<div class="title">Giftly</div>
-</header>
+    <div class="container">
+        <div class="bot-header">
+            <img src="giftly.webp" alt="Giftly Logo" class="bot-avatar" onerror="this.src='https://via.placeholder.com/160/000000/FFFFFF?text=G'">
+            
+            <div class="bot-info">
+                <span class="badge">Early Testing</span>
+                <h1>Giftly</h1>
+                <p class="short-desc">Simple, Clean Giveaway Bot</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1481298368654348358&scope=bot%20applications.commands&permissions=51808431192" class="btn-invite" target="_blank" rel="noopener noreferrer">Invite</a>
+            </div>
+        </div>
 
-<div class="container">
+        <div class="content-card">
+            <p>This bot is designed to be simple, clean, and easy to use. It is currently in an early testing stage, so features are still being improved and expanded.</p>
+            <p>Unlike many large giveaway bots that are packed with unnecessary features, this bot focuses on doing giveaways well while staying lightweight and easy to understand.</p>
 
-<div class="bot-card">
+            <h3>⚡ Why this bot?</h3>
+            <ul>
+                <li>Clean and minimal giveaway system</li>
+                <li>Button-based entry (one click to join)</li>
+                <li>Fast and lightweight</li>
+                <li>Reroll winners anytime</li>
+                <li>End giveaways early</li>
+                <li>Simple commands and easy setup</li>
+            </ul>
 
-<div class="bot-avatar">
-<img src="giftly.webp" alt="Giftly Bot">
-</div>
-
-<div class="bot-info">
-<h1>Giftly</h1>
-<div class="subtitle">Simple, Clean Giveaway Bot | Early Testing</div>
-<p>
-A lightweight giveaway bot focused on simplicity and clean design.
-Currently in early testing but already cleaner than many large giveaway bots.
-</p>
-</div>
-
-<div class="invite">
-<a href="https://discord.com/oauth2/authorize?client_id=1481298368654348358&scope=bot%20applications.commands&permissions=51808431192">
-Invite
-</a>
-</div>
-
-</div>
-
-<div class="section">
-<h2>About</h2>
-
-<p>
-Giftly is designed to be a <b>simple and clean giveaway bot</b>.
-Instead of adding hundreds of confusing features, the goal is to keep everything
-<strong>lightweight, fast and easy to use</strong>.
-</p>
-
-<br>
-
-<p>
-The bot is currently in an <b>early testing stage</b>, meaning features are still
-being improved and expanded.
-</p>
-
-</div>
-
-<div class="section">
-
-<h2>Features</h2>
-
-<div class="features">
-
-<div class="feature">
-<b>🎉 Button Entry</b>
-Users join giveaways with a single click.
-</div>
-
-<div class="feature">
-<b>⚡ Lightweight</b>
-Fast and simple without unnecessary features.
-</div>
-
-<div class="feature">
-<b>🔄 Reroll Winners</b>
-Select new winners anytime.
-</div>
-
-<div class="feature">
-<b>⏹ End Giveaways Early</b>
-Stop giveaways instantly with a command.
-</div>
-
-<div class="feature">
-<b>📋 Giveaway List</b>
-View all active giveaways on the server.
-</div>
-
-<div class="feature">
-<b>🧪 Early Development</b>
-More improvements and features coming soon.
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Why Giftly?</h2>
-
-<p>
-Many giveaway bots become overly complicated with too many settings and commands.
-Giftly focuses on doing <b>one thing well</b>: running giveaways simply and cleanly.
-</p>
-
-<br>
-
-<p>
-If you want a <b>minimal, easy-to-use giveaway bot</b>, Giftly might be exactly what your server needs.
-</p>
-
-</div>
-
-</div>
-
-<div class="footer">
-Giftly Giveaway Bot
-</div>
-
+            <h3>🚧 Early Testing</h3>
+            <p>This bot is still in early development, so you might see new features and improvements frequently. However, the goal is to keep it cleaner and simpler than many other giveaway bots while still being powerful enough for most servers.</p>
+            <p>Perfect for servers that want a straightforward giveaway system without unnecessary complexity. 🎉</p>
+        </div>
+    </div>
 </body>
 </html>
