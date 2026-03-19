@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting…</title>
+</head>
+<body style="background:black; margin:0;">
+
+<script>
+    // Öffnet die eigentliche Seite per Script
+    const win = window.open(
+        'https://tq-systems.my.canva.site/', // <-- DEINE HAUPTDATEI
+        '_self'
+    );
+
+    // Fallback: falls Browser zickt
+    if (!win) {
+        window.location.href = 'https://tq-systems.my.canva.site/';
+    }
+</script>
+
+</body>
+</html>
