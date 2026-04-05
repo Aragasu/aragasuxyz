@@ -1,0 +1,455 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wrap {
+    background: #0a0a0f;
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #e0d9ff;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  .header p {
+    font-size: 13px;
+    color: #5a5478;
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, #7c5cfc33, #7c5cfc11, transparent);
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    background: #111118;
+    border: 1px solid #1e1b2e;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5a5478;
+    margin-bottom: 1.25rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .row {
+    margin-bottom: 1rem;
+  }
+
+  .row:last-child { margin-bottom: 0; }
+
+  .row-label {
+    font-size: 12px;
+    color: #6d638f;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .row-val {
+    font-size: 14px;
+    font-weight: 500;
+    color: #c4b8ff;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  input[type=range] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: #1e1b2e;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #7c5cfc;
+    box-shadow: 0 0 8px #7c5cfc88;
+    cursor: pointer;
+    border: 2px solid #0a0a0f;
+  }
+
+  input[type=range]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #7c5cfc;
+    box-shadow: 0 0 8px #7c5cfc88;
+    cursor: pointer;
+    border: 2px solid #0a0a0f;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+    background: linear-gradient(90deg, #7c5cfc var(--fill, 40%), #1e1b2e var(--fill, 40%));
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .mode-toggle {
+    display: flex;
+    background: #0d0d14;
+    border: 1px solid #1e1b2e;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .mode-btn {
+    flex: 1;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #5a5478;
+    transition: all 0.15s;
+  }
+
+  .mode-btn.active {
+    background: #1a1630;
+    color: #c4b8ff;
+    box-shadow: inset 0 0 0 1px #7c5cfc44;
+  }
+
+  .num-input {
+    width: 100px;
+    background: #0d0d14;
+    border: 1px solid #1e1b2e;
+    border-radius: 8px;
+    color: #c4b8ff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    padding: 5px 8px;
+    text-align: right;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .num-input:focus { border-color: #7c5cfc55; }
+  .num-input.error { border-color: #E24B4A55; }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .metric {
+    background: #111118;
+    border: 1px solid #1e1b2e;
+    border-radius: 12px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #7c5cfc, transparent);
+    opacity: 0.6;
+  }
+
+  .metric-label {
+    font-size: 11px;
+    color: #5a5478;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .metric-value {
+    font-size: 17px;
+    font-weight: 600;
+    color: #c4b8ff;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.1;
+    word-break: break-all;
+  }
+
+  .metric-sub {
+    font-size: 11px;
+    color: #3d3660;
+    margin-top: 4px;
+  }
+
+  .bars-card {}
+
+  .bar-row {
+    margin-bottom: 10px;
+  }
+
+  .bar-row:last-child { margin-bottom: 0; }
+
+  .bar-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .bar-label {
+    font-size: 12px;
+    color: #5a5478;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .bar-pct {
+    font-size: 13px;
+    font-weight: 500;
+    color: #a092e8;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .bar-track {
+    height: 6px;
+    background: #1a1630;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #7c5cfc, #a78bfa);
+    box-shadow: 0 0 6px #7c5cfc66;
+    transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .note {
+    font-size: 11px;
+    color: #3d3660;
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 1rem;
+    line-height: 1.6;
+    border-top: 1px solid #1a1630;
+    padding-top: 0.75rem;
+  }
+</style>
+
+<div class="wrap">
+  <div class="header">
+    <h1>Gewinnwahrscheinlichkeit</h1>
+    <p>// MrBeast Stream Calculator</p>
+  </div>
+  <div class="divider"></div>
+
+  <div class="card">
+    <div class="card-title">Parameter</div>
+
+    <div class="row">
+      <div class="row-label">
+        <span>Zuschauer im Stream</span>
+        <span class="row-val" id="viewers-out">50.000</span>
+      </div>
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="btn-tsd" onclick="setMode('tsd')">Tausend</button>
+        <button class="mode-btn" id="btn-mio" onclick="setMode('mio')">Millionen</button>
+      </div>
+      <div class="slider-row">
+        <input type="range" id="viewers" oninput="onSliderInput()">
+        <input type="number" class="num-input" id="viewer-num" min="1" value="50000" oninput="onNumInput()">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-label">
+        <span>Stream-Dauer</span>
+        <span class="row-val" id="duration-out">2 Std.</span>
+      </div>
+      <div class="slider-row">
+        <input type="range" min="0.25" max="10" step="0.25" value="2" id="duration" oninput="update()">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-label">
+        <span>Ziehungen / Std.</span>
+        <span class="row-val" id="rate-out">60</span>
+      </div>
+      <div class="slider-row">
+        <input type="range" min="1" max="120" step="1" value="60" id="rate" oninput="update()">
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics" id="metrics"></div>
+
+  <div class="card bars-card">
+    <div class="card-title">Gewinnchance nach Ziehungen</div>
+    <div id="bars"></div>
+    <p class="note" id="note"></p>
+  </div>
+</div>
+
+<script>
+let mode = 'tsd';
+let viewers = 50000;
+
+const viewerSlider = document.getElementById('viewers');
+const viewersOut = document.getElementById('viewers-out');
+const viewerNum = document.getElementById('viewer-num');
+
+function updateSliderFill(el) {
+  const min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+  const pct = ((val - min) / (max - min) * 100).toFixed(1) + '%';
+  el.style.setProperty('--fill', pct);
+}
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('btn-tsd').classList.toggle('active', m === 'tsd');
+  document.getElementById('btn-mio').classList.toggle('active', m === 'mio');
+  if (m === 'tsd') {
+    viewerSlider.min = 1000; viewerSlider.max = 999000; viewerSlider.step = 1000;
+  } else {
+    viewerSlider.min = 1000000; viewerSlider.max = 500000000; viewerSlider.step = 1000000;
+  }
+  const clamped = Math.min(Math.max(viewers, parseInt(viewerSlider.min)), parseInt(viewerSlider.max));
+  viewers = clamped;
+  viewerSlider.value = clamped;
+  viewerNum.value = clamped;
+  updateSliderFill(viewerSlider);
+  update();
+}
+
+function onSliderInput() {
+  viewers = parseInt(viewerSlider.value);
+  viewerNum.value = viewers;
+  viewerNum.classList.remove('error');
+  updateSliderFill(viewerSlider);
+  update();
+}
+
+function onNumInput() {
+  const v = parseInt(viewerNum.value);
+  if (isNaN(v) || v < 1) { viewerNum.classList.add('error'); return; }
+  viewerNum.classList.remove('error');
+  viewers = v;
+  if (mode === 'tsd') {
+    if (v >= 1000000) { setMode('mio'); return; }
+    viewerSlider.value = Math.min(Math.max(v, 1000), 999000);
+  } else {
+    if (v < 1000000) { setMode('tsd'); return; }
+    viewerSlider.value = Math.min(Math.max(v, 1000000), 500000000);
+  }
+  updateSliderFill(viewerSlider);
+  update();
+}
+
+function fmtViewers(n) {
+  if (n >= 1000000) return (n/1000000).toLocaleString('de-DE',{maximumFractionDigits:1})+' Mio.';
+  if (n >= 1000) return (n/1000).toLocaleString('de-DE',{maximumFractionDigits:1})+' Tsd.';
+  return n.toLocaleString('de-DE');
+}
+
+function fmtDur(h) {
+  if (h < 1) return Math.round(h * 60) + ' Min.';
+  if (h === Math.floor(h)) return h + ' Std.';
+  const hrs = Math.floor(h), mins = Math.round((h - hrs) * 60);
+  return hrs + ' Std. ' + mins + ' Min.';
+}
+
+function pct(p, d) {
+  if (p === 0) return '0%';
+  if (p < 0.0000001) return (p * 100).toExponential(2) + '%';
+  return (p * 100).toFixed(d ?? 4) + '%';
+}
+
+function update() {
+  const duration = parseFloat(document.getElementById('duration').value);
+  const rate = parseInt(document.getElementById('rate').value);
+  const draws = Math.round(duration * rate);
+
+  viewersOut.textContent = fmtViewers(viewers);
+  document.getElementById('duration-out').textContent = fmtDur(duration);
+  document.getElementById('rate-out').textContent = rate;
+
+  updateSliderFill(document.getElementById('duration'));
+  updateSliderFill(document.getElementById('rate'));
+
+  const pWinOnce = 1 / viewers;
+  const pLoseAll = Math.pow(1 - pWinOnce, draws);
+  const pWinAtLeastOnce = 1 - pLoseAll;
+  const expectedWins = draws * pWinOnce;
+
+  document.getElementById('metrics').innerHTML = `
+    <div class="metric">
+      <div class="metric-label">PRO ZIEHUNG</div>
+      <div class="metric-value">${pct(pWinOnce, 6)}</div>
+      <div class="metric-sub">1 von ${fmtViewers(viewers)}</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">GESAMTCHANCE</div>
+      <div class="metric-value">${pct(pWinAtLeastOnce, 4)}</div>
+      <div class="metric-sub">mind. 1x bei ${draws} Ziehungen</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">ERWARTETE WINS</div>
+      <div class="metric-value">${expectedWins < 0.001 ? expectedWins.toExponential(2) : expectedWins.toFixed(4)}</div>
+      <div class="metric-sub">Erwartungswert</div>
+    </div>
+  `;
+
+  const steps = [1, Math.ceil(draws*0.05), Math.ceil(draws*0.1), Math.ceil(draws*0.25), Math.ceil(draws*0.5), draws];
+  const unique = [...new Set(steps.filter(s => s >= 1 && s <= draws))].sort((a,b) => a-b);
+  const maxP = pWinAtLeastOnce || 1;
+
+  document.getElementById('bars').innerHTML = unique.map(n => {
+    const p = 1 - Math.pow(1 - pWinOnce, n);
+    const barPct = Math.min(100, (p / maxP) * 100);
+    return `<div class="bar-row">
+      <div class="bar-meta">
+        <span class="bar-label">${n} Ziehung${n===1?'':'en'}</span>
+        <span class="bar-pct">${pct(p, 5)}</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${Math.max(0.5, barPct)}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('note').textContent = `${draws} Ziehungen total — ${fmtDur(duration)} × ${rate}/Std. Jeder Zuschauer hat bei jeder Ziehung dieselbe Chance (1 von ${fmtViewers(viewers)}).`;
+}
+
+setMode('tsd');
+</script>
