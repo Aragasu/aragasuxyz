@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +8,16 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
         :root {
-            --bg-main: #121212;
-            --bg-card: #1e1e1e;
-            --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-            /* Hier habe ich das Lila angepasst */
-            --accent: #5865F2; 
-            --accent-hover: #4752C4;
-            --border-color: #333333;
+            --bg-main: #0a0a0f;
+            --bg-card: #13131a;
+            --bg-elevated: #1a1a24;
+            --text-main: #e8e8f0;
+            --text-muted: #8b8b9e;
+            --accent: #9b87f5;
+            --accent-hover: #b5a3ff;
+            --accent-dim: rgba(155, 135, 245, 0.15);
+            --border-color: #2a2a35;
+            --glow: rgba(155, 135, 245, 0.3);
         }
 
         * {
@@ -40,6 +42,7 @@
             font-size: 1.2rem;
             display: flex;
             align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .container {
@@ -61,8 +64,8 @@
             height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--bg-card);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 24px var(--glow), 0 8px 24px rgba(0,0,0,0.4);
             background-color: #000;
         }
 
@@ -80,29 +83,56 @@
 
         .badge {
             display: inline-block;
-            background-color: rgba(88, 101, 242, 0.15);
+            background-color: var(--accent-dim);
             color: var(--accent);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            border: 1px solid rgba(155, 135, 245, 0.3);
         }
 
         .btn-invite {
             display: inline-block;
             background-color: var(--accent);
-            color: #ffffff;
+            color: #0a0a0f;
             text-decoration: none;
             padding: 0.8rem 2rem;
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 16px rgba(155, 135, 245, 0.4);
         }
 
         .btn-invite:hover {
             background-color: var(--accent-hover);
+            box-shadow: 0 0 24px var(--glow);
+            transform: translateY(-1px);
+        }
+
+        .btn-tester {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .btn-tester:hover {
+            background-color: var(--accent-dim);
+            box-shadow: 0 0 16px rgba(155, 135, 245, 0.3);
+            transform: translateY(-1px);
         }
 
         .content-card {
@@ -110,12 +140,14 @@
             border-radius: 12px;
             padding: 2.5rem;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            margin-bottom: 2rem;
         }
 
         .content-card p {
             margin-bottom: 1.5rem;
-            color: #d1d1d5;
+            color: var(--text-main);
+            opacity: 0.9;
         }
 
         .content-card h3 {
@@ -135,7 +167,8 @@
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
-            color: #d1d1d5;
+            color: var(--text-main);
+            opacity: 0.9;
         }
 
         .content-card ul li::before {
@@ -145,6 +178,182 @@
             color: var(--accent);
             font-weight: bold;
             font-size: 1.2rem;
+        }
+
+        .tester-card {
+            background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 24px rgba(155, 135, 245, 0.2), 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .tester-card h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 32px rgba(155, 135, 245, 0.3), 0 8px 32px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+        }
+
+        .modal h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(155, 135, 245, 0.3);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .checkbox-group label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent);
+            color: #0a0a0f;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 16px rgba(155, 135, 245, 0.4);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-hover);
+            box-shadow: 0 0 24px var(--glow);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:disabled {
+            background-color: var(--border-color);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .btn-tester {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
         }
     </style>
 </head>
@@ -161,7 +370,23 @@
                 <h1>Giftly</h1>
                 <p class="short-desc">Simple, Clean Giveaway Bot</p>
                 <a href="https://discord.com/oauth2/authorize?client_id=1481298368654348358" class="btn-invite" target="_blank" rel="noopener noreferrer">Invite</a>
+                <button class="btn-tester" onclick="openModal()">Become a Tester 🎁</button>
             </div>
+        </div>
+
+        <div class="content-card tester-card">
+            <h3>🎁 We're Looking for Testers!</h3>
+            <p>Giftly is still in early testing and we need your help! Test the bot on your server and give us feedback.</p>
+            
+            <p><strong class="highlight">As a thank you, we're giving away a gift card of your choice worth up to $10 among all testers!</strong></p>
+            
+            <ul>
+                <li>Test all features of the bot</li>
+                <li>Report bugs or suggest improvements</li>
+                <li>Chance to win a $10 gift card (Roblox, Steam, Discord Nitro, etc.)</li>
+            </ul>
+
+            <p>Click "Become a Tester" to participate. We only need your email address to contact you.</p>
         </div>
 
         <div class="content-card">
@@ -183,5 +408,95 @@
             <p>Perfect for servers that want a straightforward giveaway system without unnecessary complexity. 🎉</p>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOutside(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            
+            <div id="formContent">
+                <h2>Become a Tester</h2>
+                <p>Sign up now and secure your chance to win a $10 gift card!</p>
+                
+                <form id="testerForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="confirm" name="confirm" required>
+                        <label for="confirm">I confirm that I will test the bot and want to participate in the giveaway.</label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Join Now</button>
+                </form>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">🎉</div>
+                <h2>Thank You!</h2>
+                <p>You're now registered for the giveaway. We'll contact you with more information about the beta test.</p>
+                <p style="margin-top: 2rem;">Good luck! 🍀</p>
+                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">Redirecting to invite the bot...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Reset form after closing
+            setTimeout(() => {
+                document.getElementById('formContent').style.display = 'block';
+                document.getElementById('successMessage').classList.remove('active');
+                document.getElementById('testerForm').reset();
+            }, 300);
+        }
+
+        function closeModalOnOutside(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const confirmed = document.getElementById('confirm').checked;
+
+            if (!email || !confirmed) {
+                alert('Please fill out all fields and confirm your participation.');
+                return;
+            }
+
+            // Here you would send the data to your backend
+            console.log('Tester registered:', { email, confirmed });
+
+            // Show success message
+            document.getElementById('formContent').style.display = 'none';
+            document.getElementById('successMessage').classList.add('active');
+
+            // Redirect to bot invite after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'https://discord.com/oauth2/authorize?client_id=1481298368654348358';
+            }, 3000);
+        }
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
