@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting…</title>
+</head>
+<body style="background:black; margin:0;">
+
+<script>
+    // Öffnet die eigentliche Seite per Script
+    const win = window.open(
+        'https://earth.google.com/web/search/TQ-Systems+Durach+GmbH,+Johann-Georg-Halske-Stra%c3%9fe+1,+87471+Durach-Weidach/@47.6924104,10.32436846,705.60390851a,334.01790064d,35y,-140.6084659h,53.04653374t,360r/data=CrwBGo0BEoYBCiUweDQ3OWM3ZWIyZmExYTViOGQ6MHhlZTBmNDA4ODdhNjllMjliGRlPqber2EdAIXH9uz5zpiRAKktUUS1TeXN0ZW1zIER1cmFjaCBHbWJILCBKb2hhbm4tR2VvcmctSGFsc2tlLVN0cmHDn2UgMSwgODc0NzEgRHVyYWNoLVdlaWRhY2gYASABIiYKJAlMi82yCNlHQBEWbG0JQthHQBmQuwAnqKokQCE5EGDVGqEkQEICCAE6AwoBMEICCABKDQj___________8BEAA?authuser=0', // <-- DEINE HAUPTDATEI
+        '_self'
+    );
+
+    // Fallback: falls Browser zickt
+    if (!win) {
+        window.location.href = 'https://earth.google.com/web/search/TQ-Systems+Durach+GmbH,+Johann-Georg-Halske-Stra%c3%9fe+1,+87471+Durach-Weidach/@47.6924104,10.32436846,705.60390851a,334.01790064d,35y,-140.6084659h,53.04653374t,360r/data=CrwBGo0BEoYBCiUweDQ3OWM3ZWIyZmExYTViOGQ6MHhlZTBmNDA4ODdhNjllMjliGRlPqber2EdAIXH9uz5zpiRAKktUUS1TeXN0ZW1zIER1cmFjaCBHbWJILCBKb2hhbm4tR2VvcmctSGFsc2tlLVN0cmHDn2UgMSwgODc0NzEgRHVyYWNoLVdlaWRhY2gYASABIiYKJAlMi82yCNlHQBEWbG0JQthHQBmQuwAnqKokQCE5EGDVGqEkQEICCAE6AwoBMEICCABKDQj___________8BEAA?authuser=0';
+    }
+</script>
+
+</body>
+</html>
